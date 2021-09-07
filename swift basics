@@ -1,0 +1,469 @@
+
+import Foundation
+----------------------------------------------------******FUNCTIONS AND PARAMETERS**************------------------------------------------------------------------------------------
+var x:Int=2
+var y:Int=3
+
+func add(a:Int,b:Int)->Int
+{
+    return a+b
+}
+
+
+
+let sum=add(a:x,b:y);
+print(sum)
+
+
+
+---------------------------------------------------------******CLASSES**************------------------------------------------------------------------------------------
+Classes can inherit from another class, which you can’t do with structs. With classes, you can write class MyViewController : UIViewController to create a subclass of UIViewController. Structs can implement protocols, can be extended, and can work with generics, though!
+Classes can be deinitialized, i.e. they can implement a deinit function. Also, you can make one or more references to the same class (i.e., classes are a reference type).
+Classes come with the built-in notion of identity, because they’re reference types. With the identity operator === you can check if two references (variables, constants, properties, etc.) refer to the same object.
+
+import Foundation
+
+class vehicle
+{
+    var type="LMV"
+}
+
+var car=vehicle();
+var t=car.type;
+print(t)
+
+
+inheritance
+
+import Foundation
+
+class vehicle
+{
+    var type="LMV"
+}
+
+class car:vehicle
+{
+    var wheels=4;
+}
+
+
+var c=car();
+var t=c.type;
+var w=c.wheels;
+print(t,w)
+
+
+---------------------------------------------------------******class with init(constructor)*******------------------------------------------------------------------------------------
+
+import Foundation
+
+class vehicle
+{
+    var type="LMV"
+}
+
+class car:vehicle
+{
+    var wheels:Int;
+    
+    init(wheels:Int)
+    {
+        self.wheels=wheels
+    }
+}
+
+
+var c=car(wheels:5);
+var t=c.type;
+var w=c.wheels;
+print(t,w)
+
+
+var x=c
+//here a new varable x points to c, if c changes, x changes
+
+if this was a struct we would have two copies instead of references
+
+https://www.youtube.com/watch?v=ys3dPSKssgk&list=PL5PR3UyfTWvfacnfUsvNcxIiKIgidNRoW&index=5&ab_channel=iOSAcademy
+
+---------------------------------------------------------******Structure**************------------------------------------------------------------------------------------
+It’s recommended to use struct in Swift by default. Structs are helpful in these scenarios, too:
+
+Simple Data Types
+Use structs for simple data types. Think about database objects you want to pass around in your code, like NewsItem, Task or User. Since they’re so well-defined, and often don’t need to accommodate complex relationships between objects, it’s simpler to use structs.
+
+Thread Safety
+In a multi-threaded environment, for instance with a database connection that’s opened in a different thread, structs are safer. They can be copied from one thread to another thread, without running the risk of a race condition or deadlock. Classes do not have this inherent safety, unless they’re deliberately made thread-safe.
+
+Mostly Structs Scenario
+When the properties of a struct are mostly value types too, like String, it makes sense to wrap them in a struct instead of a class. It’s OK to use structs within class types, but pay extra attention if you use classes within struct types. Classes are reference types, so if you’re unaware that your struct references a shared class instance, and your struct gets copied, both structs share a reference to that class!
+
+Don’t Need Inheritance
+Structs cannot inherit code from other structs. If you don’t need inheritance, it’s smarter to use structs (instead of classes). Structs can still conform to protocols, and they can be extended, so you still have a few options for creating flexible, composable code.
+
+
+In Swift, structs are value types whereas classes are reference types. When you copy a struct, you end up with two unique copies of the data. When you copy a class, you end up with two references to one instance of the data. It’s a crucial difference, and it affects your choice between classes or structs.
+
+
+---------------------------------------------------------******Structure with init**************------------------------------------------------------------------------------------
+
+import Foundation
+
+struct student
+{
+    var m1="2"
+}
+
+var s1=student()
+var s2=student()
+s2.m1="3"
+print(s1.m1)
+print(s2.m1)
+
+
+//same with init
+import Foundation
+
+struct student
+{
+    var m1:Int
+    
+    init(marks:Int)
+    {
+        self.m1=marks
+    }
+}
+
+var s1=student(marks:10)
+var s2=student(marks:20)
+
+
+print(s1.m1)
+print(s2.m1)
+
+---------------------------------------------------------****** for LOOP**************------------------------------------------------------------------------------------
+import Foundation
+    
+    class trials
+	{
+    var numbers=[1,2,3,4,5,6]
+    
+    
+    func printnos()
+    {
+        for i in numbers
+        {
+            let r=i*2
+            print(r)
+        }
+    }
+    
+       
+    }
+        
+    var tr=trials();
+    tr.printnos()
+
+-------------------------------------------------------------------****** WHILE LOOP**************------------------------------------------------------------------------------------
+
+
+
+ class trials
+                                               import Foundation
+                        
+                        class trials
+                        {
+                        var numbers=[1,2,3,4,5,6]
+                        
+                        
+                        func printnos()
+                        {
+                          let nos=numbers.count
+                          var i=0;
+                          
+                          while(i<nos)
+                          {
+                              print(numbers[i])
+                              i=i+1
+                          }
+                         
+                        }
+                        
+                        func printname()
+                        {
+                            let n=1
+                        let name="yogesh"
+                            
+                            if(n==1)
+                            {
+                                print("hello "+name)
+                            }
+                        }
+                        
+                        }
+                        
+                        
+                        var tr=trials();
+                        tr.printnos()
+                        tr.printname()
+                    
+                    
+-------------------------------------------------------------------****** OPTIONALS -type**************-----------------------------------------------------------------------------
+  //Optionals
+                        
+                        var name:String="JOE"
+                        name=nil
+                        print(name)
+						//cannot set to nill but we can set name=""
+						still a value
+						so add a ? after string to make it optional
+						
+						   import Foundation
+                        
+                        //Optionals
+                        
+                        var name:String?="JOE"
+                        name=nil
+                        //print(name)
+                        
+                        print(type(of:name))
+						
+						OUTPUT Optional<String>
+						
+						
+-------------------------------------------------------------------****** OPTIONALS -unwrapping*******-----------------------------------------------------------------------------
+						
+						     import Foundation
+                        
+                        //Optionals
+                        
+                       var x:Int?=2
+                       var y:Int?=3
+                       
+                      if let n1=x
+                      {
+                          if let n2=y
+                          {
+                              let result=n1+n2
+                              print(result)
+                          }
+                      }
+					  
+					  
+
+-------------------------------------------------------------------****** OPTIONALS -automatic unwrapping*******-------------------------------------------------------------------
+						var x:Int!=2
+                       var y:Int!=3
+                       
+                       var result=x+y
+                       print(result)
+-------------------------------------------------------------------****** GUARD*******-----------------------------------------------------------------------------
+                        import Foundation
+                        
+                        //GUARD
+                        class trials
+                        {
+                           
+                            
+                            func gtf(number:Int)->Bool
+                            {
+                                guard(number>5)else 
+                                {
+                                return false
+                                    
+                                }
+                            return true
+                            
+                            }
+                        }
+                        
+                        var t=trials();
+                        let x=t.gtf(number:10)
+                        print(x)
+                                              
+-------------------------------------------------------------------****** ENUM*******-----------------------------------------------------------------------------
+
+ enum states:String
+                       {
+                           case inprogress="1", aborted="2", complete="3", started="4"
+                       }
+					   
+					   
+					   
+					                           import Foundation
+                        
+                     enum WeatherType {
+    case sun, cloud, rain, wind, snow
+}
+
+func getweather(weather:WeatherType)->String?
+{
+    if weather==WeatherType.sun
+    {
+        return "awesome"
+    }
+    else
+    {
+        return "damn"
+    }
+}
+
+
+var emotion:String=getweather(weather:WeatherType.sun)
+print(emotion)
+
+
+---------------------------------------------------------------------------****** SWITCH*******-----------------------------------------------------------------------------
+
+import Foundation
+                        
+                        class trials
+                        {
+                            
+                        
+                           enum states:String
+                           {
+                               case inprogress
+                               case aborted
+                               case complete
+                               case started
+                           }
+                        let current=states.inprogress
+                        
+                                  func checkState()
+                                  {
+                                 
+                                  
+                                      switch current
+                                      {
+                                        case .inprogress:  
+                                        print("inprogress")
+                                        break;
+                                        
+                                        
+                                        case .complete:
+                                        break;
+                                        
+                                        
+                                        case .aborted:
+                                        break
+                                        
+                                        case .started:
+                                        break
+                                      }
+                                     
+                                  }
+                      
+                      }
+                     var t=trials();
+                     t.checkState()
+
+
+-----------------------------------------------------------------------****** PROTOCOL similar to interface--------------------------------------------------------------------
+		import Foundation
+                        
+                    protocol carproto
+                    {
+                        var color:String{get set}
+                        
+                        func drive()
+                         func isallwheeldrive()->Bool
+                        
+                    }
+                    
+                    
+                    class car
+                    {
+                        
+                    }
+                   
+                   
+                   class bmw:carproto
+                   {
+                       var color:String="red"
+                       
+                       func drive()
+                       {
+                           
+                       }
+                       
+                       func isallwheeldrive()->Bool
+                       {
+                           return true
+                       }
+                   }
+
+                   var b=bmw()
+                   print(b.color)
+                   
+                   var x:Bool=b.isallwheeldrive()
+                   print(x)
+                       
+-------------------------------------------------------------------****** CLOSURES*******-----------------------------------------------------------------------------
+import Foundation
+
+let divide = {
+   (val1: Int, val2: Int) -> Int in 
+   return val1 / val2 
+}
+
+let result=divide(20,10)
+print(result)
+
+
+-------------------------------------------------------------------****** Collection types(Array)*******-----------------------------------------------------------------------------
+
+import Foundation
+ 
+var player:[String] = ["rock", "paper", "scissors", "lizard", "spock"]
+ 
+for i in player
+{
+    print(i)
+}
+
+player.append("Yogesh")
+
+
+print("new mf is "+player[5])
+
+
+print("number od items in array \(player.count)")
+
+print("displaying stuff from range\(player[1...3])")
+
+player.insert("yog",at:0)
+print(player[0])
+
+player.remove(at:0)
+print(player[0])
+
+
+player.removeLast()
+print(player.count)
+print(player)
+
+
+for(index,value) in player.enumerated()
+{
+    print("item \(index+1):\(value)")
+}
+-------------------------------------------------------------------****** Collection types(Sets)*******-----------------------------------------------------------------------------
+
+
+
+
+-------------------------------------------------------------------****** OPTIONALS -unwrapping*******-----------------------------------------------------------------------------
+-------------------------------------------------------------------****** OPTIONALS -unwrapping*******-----------------------------------------------------------------------------
+-------------------------------------------------------------------****** OPTIONALS -unwrapping*******-----------------------------------------------------------------------------
+-------------------------------------------------------------------****** OPTIONALS -unwrapping*******-----------------------------------------------------------------------------
+-------------------------------------------------------------------****** OPTIONALS -unwrapping*******-----------------------------------------------------------------------------
+-------------------------------------------------------------------****** OPTIONALS -unwrapping*******-----------------------------------------------------------------------------
+-------------------------------------------------------------------****** OPTIONALS -unwrapping*******-----------------------------------------------------------------------------
+-------------------------------------------------------------------****** OPTIONALS -unwrapping*******-----------------------------------------------------------------------------
+-------------------------------------------------------------------****** OPTIONALS -unwrapping*******-----------------------------------------------------------------------------
+-------------------------------------------------------------------****** OPTIONALS -unwrapping*******-----------------------------------------------------------------------------
+-------------------------------------------------------------------****** OPTIONALS -unwrapping*******-----------------------------------------------------------------------------
+-------------------------------------------------------------------****** OPTIONALS -unwrapping*******-----------------------------------------------------------------------------
+-------------------------------------------------------------------****** OPTIONALS -unwrapping*******-----------------------------------------------------------------------------
